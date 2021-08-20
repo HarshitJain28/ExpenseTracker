@@ -4,14 +4,16 @@ import 'package:intl/intl.dart';
 import '../models/transactions.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> transactions;
-  TransactionList(this.transactions);
+  final List<Transaction> _transactions;
+  final Function _deleteTransaction;
+
+  TransactionList(this._transactions, this._deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 400,
-        child: transactions.isEmpty
+        height: 480,
+        child: _transactions.isEmpty
             ? Column(
                 children: [
                   Text(
@@ -42,64 +44,22 @@ class TransactionList extends StatelessWidget {
                           padding: EdgeInsets.all(6),
                           child: FittedBox(
                             child: Text(
-                                '\u{20B9}${transactions[index].amount.toStringAsFixed(2)}'),
+                                '\u{20B9}${_transactions[index].amount.toStringAsFixed(2)}'),
                           ),
                         ),
                       ),
                       title: Text(
-                        transactions[index].title,
+                        _transactions[index].title,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       subtitle: Text(
-                        DateFormat.yMMMd().format(transactions[index].date),
+                        DateFormat.yMMMd().format(_transactions[index].date),
                       ),
+                      trailing: IconButton(icon: Icon(Icons.delete), onPressed: () => _deleteTransaction(_transactions[index].id),),
                     ),
                   );
-                  //   child: Row(
-                  //     children: [
-                  //       Container(
-                  //         margin: EdgeInsets.all(10),
-                  //         padding: EdgeInsets.symmetric(
-                  //             vertical: 10, horizontal: 15),
-                  //         child: Text(
-                  //           '\u{20B9}${transactions[index].amount.toStringAsFixed(2)}',
-                  //           style: TextStyle(
-                  //             color: Theme.of(context).primaryColor,
-                  //             fontWeight: FontWeight.bold,
-                  //             fontSize: 18,
-                  //           ),
-                  //         ),
-                  //         decoration: BoxDecoration(
-                  //           border: Border.all(
-                  //             color: Theme.of(context).primaryColor,
-                  //             width: 2,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //           Text(
-                  //             transactions[index].title,
-                  //             style: TextStyle(
-                  //               fontSize: 15,
-                  //               fontWeight: FontWeight.bold,
-                  //             ),
-                  //           ),
-                  //           Text(
-                  //             DateFormat.yMMMd()
-                  //                 .format(transactions[index].date),
-                  //             style: TextStyle(
-                  //               color: Colors.grey,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // );
                 },
-                itemCount: transactions.length,
+                itemCount: _transactions.length,
               ));
   }
 }

@@ -9,11 +9,10 @@ class Bars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(spendingAmount);
     return Column(
       children: [
         Container(
-          height: 10,
+          height: 15,
           child: FittedBox(
             child: Text('\u{20B9}${spendingAmount.toStringAsFixed(0)}'),
           ),
