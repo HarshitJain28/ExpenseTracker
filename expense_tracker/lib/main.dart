@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transactions.add(newTx);
     });
+    _transactions.sort((a, b) => a.date.compareTo(b.date));
   }
 
   void _deleteTransaction(String id) {
@@ -107,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_transactions, _deleteTransaction),
+            TransactionList(_transactions.reversed.toList(), _deleteTransaction),
           ],
         ),
       ),
