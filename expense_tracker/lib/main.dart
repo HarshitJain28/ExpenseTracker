@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import './models/transactions.dart';
@@ -96,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text('Expense Tracker'),
       actions: [
@@ -108,57 +110,57 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
     final listTx = Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.7,
-                    child: TransactionList(
-                        _transactions.reversed.toList(), _deleteTransaction));
+        height: (mediaQuery.size.height -
+                appBar.preferredSize.height -
+                mediaQuery.padding.top) *
+            0.7,
+        child: TransactionList(
+            _transactions.reversed.toList(), _deleteTransaction));
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             if (isLandscape)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Show Chart: ',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                Switch(
-                    value: _switch,
-                    onChanged: (val) {
-                      setState(() {
-                        _switch = val;
-                      });
-                    }),
-              ],
-            ),
-            if(!isLandscape)
-            Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.3,
-                    child: Chart(_recentTransactions)),
-            if(!isLandscape)
-            listTx,
-            if(isLandscape)
-            _switch
-                ? Container(
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.7,
-                    child: Chart(_recentTransactions))
-                : listTx,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Show Chart: ',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Switch.adaptive(
+                      activeColor: Theme.of(context).primaryColor,
+                      value: _switch,
+                      onChanged: (val) {
+                        setState(() {
+                          _switch = val;
+                        });
+                      }),
+                ],
+              ),
+            if (!isLandscape)
+              Container(
+                  height: (mediaQuery.size.height -
+                          appBar.preferredSize.height -
+                          mediaQuery.padding.top) *
+                      0.3,
+                  child: Chart(_recentTransactions)),
+            if (!isLandscape) listTx,
+            if (isLandscape)
+              _switch
+                  ? Container(
+                      height: (mediaQuery.size.height -
+                              appBar.preferredSize.height -
+                              mediaQuery.padding.top) *
+                          0.7,
+                      child: Chart(_recentTransactions))
+                  : listTx,
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Platform.isIOS ? Container() : FloatingActionButton(
         onPressed: () => _addNewTransactionModal(context),
         child: Icon(Icons.add),
       ),
