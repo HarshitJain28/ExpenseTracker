@@ -38,7 +38,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assests/icons/expense_icon.png"
+  image_path: "assets/icons/expense_icon.png"
   
   
   
@@ -56,7 +56,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assests/images/waiting.png
+    - assets/images/waiting.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -73,13 +73,13 @@ flutter:
   fonts:
     - family: OpenSans
       fonts:
-        - asset: assests/fonts/OpenSans-Regular.ttf
-        - asset: assests/fonts/OpenSans-Bold.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
           weight: 700
     - family: QuickSand
       fonts:
-        - asset: assests/fonts/Quicksand-Regular.ttf
-        - asset: assests/fonts/Quicksand-Bold.ttf
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
   #   - family: Trajan Pro
   #     fonts:
