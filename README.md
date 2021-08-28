@@ -8,7 +8,7 @@
 </div>
 <div><br><div>
 
-An app that allows you to keep track of your expenses. You can update your expenditure and even delete them. 
+An app that allows you to keep track of your expenses. You can add your expenditures and even delete them. 
 The app will give you a bar chart with each day having the calculated percentage of total expenses spent in the last week.
 
 ## Screenshots
